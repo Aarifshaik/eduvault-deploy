@@ -70,9 +70,9 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: "https://github.com/nextui-org/nextui",
+    github: "https://github.com/Aarifshaik/eduvault-deploy.git",
     // twitter: "https://twitter.com/getnextui",
-    linkedin: "https://www.linkedin.com/company/nextui",
+    linkedin: "https://www.linkedin.com/pulse/copy-eduvault-aarif-shaik-xlbrc/?trackingId=ZYy2b890YEF0eFEUX%2FaE2Q%3D%3D",
     docs: "https://nextui-docs-v2.vercel.app",
     // discord: "https://discord.gg/9b6yyZKmH4",
     discord: "https://discord.gg/4fJQsnFK",
