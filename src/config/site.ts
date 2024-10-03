@@ -1,3 +1,5 @@
+// import { link } from "@nextui-org/theme";
+
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
@@ -9,12 +11,12 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Docs",
+      label: "Sign Up",
       href: "/docs",
     },
     {
       label: "Pricing",
-      href: "/pricing",
+      href: "/user",
     },
     {
       label: "Blog",
@@ -23,6 +25,14 @@ export const siteConfig = {
     {
       label: "About",
       href: "/about",
+    },
+    {
+      label: "Admin",
+      href: "/admin",
+    },
+    {
+      label: "Register",
+      href: "/register",
     },
   ],
   navMenuItems: [
@@ -61,9 +71,11 @@ export const siteConfig = {
   ],
   links: {
     github: "https://github.com/nextui-org/nextui",
-    twitter: "https://twitter.com/getnextui",
+    // twitter: "https://twitter.com/getnextui",
+    linkedin: "https://www.linkedin.com/company/nextui",
     docs: "https://nextui-docs-v2.vercel.app",
-    discord: "https://discord.gg/9b6yyZKmH4",
+    // discord: "https://discord.gg/9b6yyZKmH4",
+    discord: "https://discord.gg/4fJQsnFK",
     sponsor: "https://patreon.com/jrgarciadev",
   },
 };

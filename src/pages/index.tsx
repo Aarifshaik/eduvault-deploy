@@ -5,7 +5,7 @@ import { button as buttonStyles } from "@nextui-org/theme";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+// import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 
 export default function IndexPage() {
@@ -13,15 +13,18 @@ export default function IndexPage() {
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-lg text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
+          <h1 className={title()}>Empowering&nbsp;</h1>
+          <h1 className={title()}>
+            minds with&nbsp;
+          </h1>
+          <h1 className={title({ color: "violet" })}>Endless&nbsp;</h1>
           <br />
-          <span className={title()}>
-            websites regardless of your design experience.
-          </span>
-          <div className={subtitle({ class: "mt-4" })}>
-            Beautiful, fast and modern React UI library.
-          </div>
+          <h1 className={title()}>
+          knowledge, one resource at a time.
+          </h1>
+          <h4 className={subtitle({ class: "mt-4" })}>
+          "Where Curiosity Meets Opportunity"
+          </h4>
         </div>
 
         <div className="flex gap-3">
@@ -34,15 +37,17 @@ export default function IndexPage() {
             })}
             href={siteConfig.links.docs}
           >
-            Documentation
+            Get Started
           </Link>
           <Link
             isExternal
-            className={buttonStyles({ variant: "bordered", radius: "full" })}
+            className={buttonStyles({ variant: "bordered", radius: "full"})}
+            // color="red"
             href={siteConfig.links.github}
           >
-            <GithubIcon size={20} />
-            GitHub
+            {/* <GithubIcon size={20} /> */}
+            {/* GitHub */}
+            Browse Library
           </Link>
         </div>
 

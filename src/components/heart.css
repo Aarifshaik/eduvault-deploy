@@ -1,0 +1,50 @@
+.heart-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  width: 50px;
+}
+
+.heart-animation {
+  position: absolute;
+  animation: fly-sway 2s ease-in-out forwards;
+}
+
+.heart1 {
+  animation-delay: 0s;
+  left: -15px;
+}
+
+.heart2 {
+  animation-delay: 0.1s;
+  left: 0;
+}
+
+.heart3 {
+  animation-delay: 0.2s;
+  left: 15px;
+}
+
+@keyframes fly-sway {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  25% {
+    transform: translateY(-40px) translateX(-10px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-80px) translateX(10px) scale(1.2);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-120px) translateX(-10px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-160px) translateX(0) scale(1);
+  }
+}

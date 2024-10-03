@@ -24,8 +24,42 @@ import {
   SearchIcon,
 } from "@/components/icons";
 import { Logo } from "@/components/icons";
+import { useState } from "react";
+import "./heart.css";
+
 
 export const Navbar = () => {
+  // const [hearts, setHearts] = useState([]);
+  const likeCount = 100;
+  const [hearts, setHearts] = useState<number[]>([]);
+
+  const handleHeartButtonClick = () => {
+    // Add the current timestamp (number) to the hearts array
+    setHearts([...hearts, Date.now()]);
+
+    // Remove the heart after the animation duration (e.g., 2 seconds)
+    setTimeout(() => {
+      setHearts((prev) => prev.slice(1));
+    }, 2000);
+
+    // alert("Coming soon!");
+  };
+
+
+  // const generateRandomStyle = () => {
+  //   const duration = Math.random() * 2 + 2; // Random duration between 2s and 4s
+  //   const delay = Math.random() * 0.5; // Random delay between 0s and 0.5s
+  //   const xMovement = Math.random() * 20 - 10; // Random horizontal movement between -10px and 10px
+  //   const scale = Math.random() * 0.5 + 0.75; // Random scale between 0.75 and 1.25
+
+  //   return {
+  //     animationDuration: `${duration}s`,
+  //     animationDelay: `${delay}s`,
+  //     transform: `translateX(${xMovement}px) scale(${scale})`,
+  //   };
+  // };
+
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -34,7 +68,7 @@ export const Navbar = () => {
         input: "text-sm",
       }}
       endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
+        <Kbd className="hidden lg:inline-block" keys={["ctrl"]}>
           K
         </Kbd>
       }
@@ -57,7 +91,7 @@ export const Navbar = () => {
             href="/"
           >
             <Logo />
-            <p className="font-bold text-inherit">ACME</p>
+            <p className="font-bold text-inherit">EduVault</p>
           </Link>
         </NavbarBrand>
         <div className="hidden lg:flex gap-4 justify-start ml-2">
@@ -83,30 +117,56 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal href={siteConfig.links.twitter} title="Twitter">
+          <Link isExternal href={siteConfig.links.linkedin}>
             <TwitterIcon className="text-default-500" />
           </Link>
-          <Link isExternal href={siteConfig.links.discord} title="Discord">
+          <Link isExternal href={siteConfig.links.discord}>
             <DiscordIcon className="text-default-500" />
           </Link>
-          <Link isExternal href={siteConfig.links.github} title="GitHub">
+          <Link isExternal href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <Button
-            isExternal
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
-          >
-            Sponsor
-          </Button>
-        </NavbarItem>
+        {/* <NavbarItem className="hidden md:flex"> */}
+          {/* <Button */}
+            {/* isExternal */}
+            {/* as={Link} */}
+            {/* className="text-sm font-normal text-default-600 bg-default-100" */}
+            {/* // href={siteConfig.links.sponsor} */}
+            {/* onClick={() => alert("Coming soon!")} */}
+            {/* startContent={<HeartFilledIcon className="text-danger" />} */}
+            {/* variant="flat" */}
+          {/* > */}
+            {/* Sponsor */}
+            {/* {likeCount} Likes */}
+          {/* </Button> */}
+        {/* </NavbarItem> */}
+    <NavbarItem className="hidden md:flex">
+      <Button
+        as="div"
+        className="text-sm font-normal text-default-600 bg-default-100 relative"
+        onClick={handleHeartButtonClick}
+        startContent={<HeartFilledIcon className="text-danger" />}
+        variant="flat"
+      >
+        {hearts.map((heart) => (
+          <div key={heart} className="heart-container">
+            <span className="heart-animation heart1">
+              <HeartFilledIcon className="text-danger" />
+            </span>
+            <span className="heart-animation heart2">
+              <HeartFilledIcon className="text-danger" />
+            </span>
+            <span className="heart-animation heart3">
+              <HeartFilledIcon className="text-danger" />
+            </span>
+          </div>
+        ))}
+        {likeCount} Likes
+      </Button>
+    </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

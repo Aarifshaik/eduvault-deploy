@@ -1,0 +1,22 @@
+.heart-container {
+    position: fixed; /* Make hearts start from a fixed position at the bottom of the page */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-name: fly-upwards;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none; /* Prevent hearts from interfering with clicks */
+  }
+  
+  @keyframes fly-upwards {
+    0% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-100vh) translateX(0) scale(1.5); /* Move the heart up by the height of the viewport */
+    }
+  }
+  
