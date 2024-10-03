@@ -11,11 +11,11 @@ import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 const descriptions = [
   "Embark on a captivating journey through the lush and vibrant forests of the world. Discover the rich diversity of flora and fauna, and immerse yourself in the tranquil beauty of nature. This adventure is not just about exploration; it's about reconnecting with the earth, breathing in the fresh air, and finding peace amidst the trees. From towering redwoods to dense rainforests, each step unveils a new wonder that leaves a lasting impression on your heart and soul.",
   "Welcome to the Valley of Life, a picturesque haven where nature thrives in harmony. This enchanting landscape is filled with vibrant colors, singing birds, and the gentle rustling of leaves. Take a moment to unwind and enjoy the breathtaking views that stretch as far as the eye can see. The valley invites you to explore its hidden paths, discover unique wildlife, and embrace the peacefulness that surrounds you. Experience the beauty of life flourishing in every corner of this magical place.",
-  "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.",
-  "Vestibulum at eros non justo pulvinar consequat nec eget elit."
-];
+  `Dive into the serene waters of "Sala Behta Hi Jayega," where tranquility and beauty coexist. This mesmerizing location is perfect for those seeking solace and inspiration. As you relax by the shimmering waters, let your mind wander and your thoughts drift away. The gentle flow of the river and the lush greenery create a symphony of sounds that calm the spirit. Embrace the moment and allow the beauty of nature to rejuvenate your soul and ignite your creativity.`,
+  `Join the ranks of seasoned adventurers in "Camping is for Pros," where every experience is a chance to learn and grow. Whether you’re pitching a tent under the stars or starting a campfire with friends, this journey teaches valuable survival skills and fosters a deep appreciation for the great outdoors. Discover the art of outdoor cooking, navigation, and wildlife observation while creating unforgettable memories with your fellow campers. The wilderness awaits you with open arms and endless possibilities.`,
+  `Venture down "The Road Not Taken," a journey filled with choices and self-discovery. This path leads you through breathtaking landscapes and invites introspection. As you navigate the twists and turns, reflect on your life decisions and the direction you wish to pursue. Each stop along the way offers an opportunity to learn more about yourself, embrace change, and take calculated risks. Step off the beaten path and embrace the unknown, for it is here that you will find your true self.`,
+  `Explore the wisdom of "The First Rule," where every story begins with a lesson. Delve into narratives that challenge your perspectives and inspire growth. This collection encompasses a range of themes, from resilience to friendship, igniting discussions that resonate deeply. Whether you're reading alone or sharing insights with friends, each story encourages reflection and self-improvement. Open your heart and mind to the possibilities, for within these pages lies a wealth of knowledge waiting to be discovered.`,
+  ];
 
 
 export default function DocsPage() {
@@ -49,7 +49,7 @@ export default function DocsPage() {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   const handleClose = () => setSelectedCard(null);
-  const words = `Oxygen gets you high. In a catastrophic emergency, we're taking giant, panicked breaths. Suddenly you become euphoric, docile. You accept your fate. It's all right here. Emergency water landing, six hundred miles an hour. Blank faces, calm as Hindu cows`;
+  // const words = `Oxygen gets you high. In a catastrophic emergency, we're taking giant, panicked breaths. Suddenly you become euphoric, docile. You accept your fate. It's all right here. Emergency water landing, six hundred miles an hour. Blank faces, calm as Hindu cows`;
 
   return (
     <DefaultLayout>
