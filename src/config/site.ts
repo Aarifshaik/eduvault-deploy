@@ -12,11 +12,11 @@ export const siteConfig = {
     },
     {
       label: "Sign Up",
-      href: "/docs",
+      href: "/signup",
     },
     {
-      label: "Pricing",
-      href: "/user",
+      label: "Login",
+      href: "/login",
     },
     {
       label: "Blog",
