@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import {
   IconBrandGithub,
   IconBrandGoogle,
-  IconBrandOnlyfans,
+  // IconBrandOnlyfans,
   IconBrandDiscord,
 } from "@tabler/icons-react";
 // import { redirect } from "react-router-dom";
