@@ -43,7 +43,7 @@ export default function IndexPage() {
             isExternal
             className={buttonStyles({ variant: "bordered", radius: "full"})}
             // color="red"
-            href={siteConfig.links.github}
+            href={siteConfig.links.browse}
           >
             {/* <GithubIcon size={20} /> */}
             {/* GitHub */}
@@ -54,8 +54,8 @@ export default function IndexPage() {
         <div className="mt-8">
           <Snippet hideCopyButton hideSymbol variant="bordered">
             <span>
-              Get started by editing{" "}
-              <Code color="primary">pages/index.tsx</Code>
+              Get started by Signing Up{" "}
+              <Code color="primary">Signup</Code>
             </span>
           </Snippet>
         </div>
