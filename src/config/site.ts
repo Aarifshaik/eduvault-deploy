@@ -73,10 +73,10 @@ export const siteConfig = {
     github: "https://github.com/Aarifshaik/eduvault-deploy.git",
     // twitter: "https://twitter.com/getnextui",
     linkedin: "https://www.linkedin.com/pulse/copy-eduvault-aarif-shaik-xlbrc/?trackingId=ZYy2b890YEF0eFEUX%2FaE2Q%3D%3D",
-    docs: "/eduvault-deploy/signup",
+    docs: "/signup",
     // discord: "https://discord.gg/9b6yyZKmH4",
     discord: "https://discord.gg/4fJQsnFK",
     sponsor: "https://patreon.com/jrgarciadev",
-    browse: "/eduvault-deploy/blog"
+    browse: "/blog"
   },
 };

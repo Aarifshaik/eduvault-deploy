@@ -29,7 +29,7 @@ export default function IndexPage() {
 
         <div className="flex gap-3">
           <Link
-            isExternal
+            // isExternal
             className={buttonStyles({
               color: "primary",
               radius: "full",
@@ -40,7 +40,7 @@ export default function IndexPage() {
             Get Started
           </Link>
           <Link
-            isExternal
+            // isExternal
             className={buttonStyles({ variant: "bordered", radius: "full"})}
             // color="red"
             href={siteConfig.links.browse}
