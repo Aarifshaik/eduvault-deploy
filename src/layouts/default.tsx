@@ -17,7 +17,7 @@ export default function DefaultLayout({
         <Link
           isExternal
           className="flex items-center gap-1 text-current"
-          href="https://nextui-docs-v2.vercel.app?utm_source=next-pages-template"
+          href="https://github.com/Aarifshaik/"
           title="nextui.org homepage"
         >
           <span className="text-default-600">Powered by</span>
