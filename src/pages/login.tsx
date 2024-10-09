@@ -5,11 +5,7 @@ import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandDiscord,
-} from "@tabler/icons-react";
+import { GitHubLogin ,GoogleLogo,DiscordLogin} from "@/components/icons";
 
 export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,7 +53,7 @@ export default function LoginPage() {
                 className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                 type="submit"
               >
-                <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+                <GitHubLogin className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
                 <span className="text-neutral-700 dark:text-neutral-300 text-sm">
                   GitHub
                 </span>
@@ -68,7 +64,7 @@ export default function LoginPage() {
                 type="submit"
                 onClick={() => window.location.replace("http://localhost:8080/oauth2/authorization/google")}
               >
-                <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+                <GoogleLogo className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
                 <span className="text-neutral-700 dark:text-neutral-300 text-sm">
                   Google
                 </span>
@@ -78,7 +74,7 @@ export default function LoginPage() {
                 className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                 type="submit"
               >
-                <IconBrandDiscord className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+                <DiscordLogin className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
                 <span className="text-neutral-700 dark:text-neutral-300 text-sm">
                   Discord
                 </span>
