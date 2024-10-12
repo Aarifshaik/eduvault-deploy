@@ -7,22 +7,36 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 // import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
+import { FlipWords } from "@/components/ui/flip-words";
 
 export default function IndexPage() {
+  const words = ["Creative", "Elegant", "Innovative", "Dynamic"];
+  const colors = ["violet", "yellow", "blue", "green"];
   return (
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-lg text-center justify-center">
-          <h1 className={title()}>Empowering&nbsp;</h1>
+          <h1 className={title({color:"violet"})}>Empowering&nbsp;</h1>
           <h1 className={title()}>
             minds with&nbsp;
           </h1>
-          <h1 className={title({ color: "violet" })}>Endless&nbsp;</h1>
+          <FlipWords className={title()} words={words} />
+          {/* <h1 className={title({ color: "violet" })}>Endless&nbsp;</h1> */}
           <br />
-          <h1 className={title()}>
-          knowledge, one resource at a time.
+          <h1 className={title({color:"cyan"})}>
+            knowledge&nbsp;
           </h1>
-          <h4 className={subtitle({ class: "mt-4" })}>
+          <h1 className={title()}>
+            one&nbsp; 
+          </h1>
+          <br/>
+          <h1 className={title({color:"yellow"})}>
+          resource&nbsp;
+          </h1>
+          <h1 className={title()}>
+          at a time.
+          </h1>
+          <h4 className={subtitle({ class: "mt-4"})}>
           "Where Curiosity Meets Opportunity"
           </h4>
         </div>

@@ -4,12 +4,13 @@ export const title = tv({
   base: "tracking-tight inline font-semibold",
   variants: {
     color: {
-      violet: "from-[#FF1CF7] to-[#b249f8]",
-      yellow: "from-[#FF705B] to-[#FFB457]",
-      blue: "from-[#5EA2EF] to-[#0072F5]",
-      cyan: "from-[#00b7fa] to-[#01cfea]",
-      green: "from-[#6FEE8D] to-[#17c964]",
-      pink: "from-[#FF72E1] to-[#F54C7A]",
+      // violet: "from-[#FF1CF7] to-[#b249f8]",
+      violet: "text-transparent bg-clip-text bg-gradient-to-b from-[#FF1CF7] to-[#b249f8]",
+      yellow: "text-transparent bg-clip-text bg-gradient-to-b from-[#FF705B] to-[#FFB457]",
+      blue: "text-transparent bg-clip-text bg-gradient-to-b from-[#5EA2EF] to-[#0072F5]",
+      cyan: "text-transparent bg-clip-text bg-gradient-to-b from-[#00b7fa] to-[#01cfea]",
+      green: "text-transparent bg-clip-text bg-gradient-to-b from-[#6FEE8D] to-[#17c964]",
+      pink: "text-transparent bg-clip-text bg-gradient-to-b from-[#FF72E1] to-[#F54C7A]",
       foreground: "dark:from-[#FFFFFF] dark:to-[#4B4B4B]",
     },
     size: {
@@ -22,7 +23,7 @@ export const title = tv({
     },
   },
   defaultVariants: {
-    size: "md",
+    size: "md"
   },
   compoundVariants: [
     {
@@ -35,7 +36,7 @@ export const title = tv({
         "pink",
         "foreground",
       ],
-      class: "bg-clip-text text-transparent bg-gradient-to-b",
+      class: "bg-clip-text text-transparent",
     },
   ],
 });

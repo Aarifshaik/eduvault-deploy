@@ -35,6 +35,36 @@ export const siteConfig = {
     //   href: "/register",
     // },
   ],
+  usernavItems: [
+    {
+      label: "Home",
+      href: "/Stuhome",
+    },
+    {
+      label: "My Resources",
+      href: "/Sturesources",
+    },
+    {
+      label: "Login",
+      href: "/",
+    },
+    {
+      label: "Blog",
+      href: "/blog",
+    },
+    {
+      label: "Upload",
+      href: "/about",
+    },
+    {
+      label: "Admin",
+      href: "/admin",
+    },
+    // {
+    //   label: "Register",
+    //   href: "/register",
+    // },
+  ],
   navMenuItems: [
     {
       label: "Profile",

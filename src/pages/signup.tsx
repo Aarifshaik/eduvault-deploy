@@ -6,13 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { GitHubLogin ,GoogleLogo,DiscordLogin} from "@/components/icons";
-// import {
-//   IconBrandGithub,
-//   IconBrandGoogle,
-//   // IconBrandOnlyfans,
-//   IconBrandDiscord,
-// } from "@tabler/icons-react";
-// import { redirect } from "react-router-dom";
+
+import {Tabs, Tab} from "@nextui-org/tabs";
+
 
 export default function SignupPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

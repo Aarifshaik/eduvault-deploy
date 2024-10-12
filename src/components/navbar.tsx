@@ -28,10 +28,36 @@ import { useState } from "react";
 import {useEffect} from "react";
 import "./heart.css";
 
+// import { AvatarWithText } from "./materialTailwind/avatar";
+import Profile from "./materialTailwind/profiledropdown";
+
 
 export const Navbar = () => {
   const [likeCount, setLikeCount] = useState();
   const [hearts, setHearts] = useState<number[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Simulating an authentication check
+  useEffect(() => {
+    fetch("http://localhost:8080/loggedCheck", {
+      method: 'GET',
+      credentials: 'include'  // Include cookies for session-based authentication
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.isLoggedIn) {
+          // User is logged in, handle the logged-in state
+          setIsLoggedIn(true);
+          console.log('User is logged in:', data);
+        } else {
+          setIsLoggedIn(false);
+          // User is not logged in
+          console.log('User is not logged in');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
+  
 
   const handleHeartButtonClick = async () => {
     // Add the current timestamp (number) to the hearts array
@@ -166,44 +192,31 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        {/* <NavbarItem className="hidden md:flex"> */}
-          {/* <Button */}
-            {/* isExternal */}
-            {/* as={Link} */}
-            {/* className="text-sm font-normal text-default-600 bg-default-100" */}
-            {/* // href={siteConfig.links.sponsor} */}
-            {/* onClick={() => alert("Coming soon!")} */}
-            {/* startContent={<HeartFilledIcon className="text-danger" />} */}
-            {/* variant="flat" */}
-          {/* > */}
-            {/* Sponsor */}
-            {/* {likeCount} Likes */}
-          {/* </Button> */}
-        {/* </NavbarItem> */}
-    <NavbarItem className="hidden md:flex">
-      <Button
-        as="div"
-        className="text-sm font-normal text-default-600 bg-default-100 relative"
-        onClick={handleHeartButtonClick}
-        startContent={<HeartFilledIcon className="text-danger" />}
-        variant="flat"
-      >
-        {hearts.map((heart) => (
-          <div key={heart} className="heart-container">
-            <span className="heart-animation heart1">
-              <HeartFilledIcon className="text-danger" />
-            </span>
-            <span className="heart-animation heart2">
-              <HeartFilledIcon className="text-danger" />
-            </span>
-            <span className="heart-animation heart3">
-              <HeartFilledIcon className="text-danger" />
-            </span>
-          </div>
-        ))}
-        {likeCount} Likes
-      </Button>
-    </NavbarItem>
+        
+        <NavbarItem className="hidden md:flex">
+          <Button
+            as="div"
+            className="text-sm font-normal text-default-600 bg-default-100 relative"
+            onClick={handleHeartButtonClick}
+            startContent={<HeartFilledIcon className="text-danger" />}
+            variant="flat"
+          >
+            {hearts.map((heart) => (
+              <div key={heart} className="heart-container">
+                <span className="heart-animation heart1">
+                  <HeartFilledIcon className="text-danger" />
+                </span>
+                <span className="heart-animation heart2">
+                  <HeartFilledIcon className="text-danger" />
+                </span>
+                <span className="heart-animation heart3">
+                  <HeartFilledIcon className="text-danger" />
+                </span>
+              </div>
+            ))}
+            {likeCount} Likes
+          </Button>
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
@@ -213,6 +226,10 @@ export const Navbar = () => {
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
+
+  
+      {isLoggedIn && <Profile />}
+
 
       <NavbarMenu>
         {searchInput}
