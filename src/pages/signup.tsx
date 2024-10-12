@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { GitHubLogin ,GoogleLogo,DiscordLogin} from "@/components/icons";
 
-import {Tabs, Tab} from "@nextui-org/tabs";
+// import {Tabs, Tab} from "@nextui-org/tabs";
 
 
 export default function SignupPage() {
