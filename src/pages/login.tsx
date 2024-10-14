@@ -8,10 +8,28 @@ import { cn } from "@/lib/utils";
 import { GitHubLogin ,GoogleLogo,DiscordLogin} from "@/components/icons";
 
 export default function LoginPage() {
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value, // use `id` as key (email, password)
+    });
+  };
+  
+  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Login form submitted");
+    const user = {
+      email: formData.email,
+      password: formData.password,
+    };
+    console.log(user);
   };
+  
 
   return (
     <DefaultLayout>
@@ -30,12 +48,12 @@ export default function LoginPage() {
           <form className="my-8" onSubmit={handleSubmit}>
             <LabelInputContainer className="mb-4">
               <Label htmlFor="email">Email Address</Label>
-              <Input id="email" placeholder="youremail@example.com" type="email" />
+              <Input id="email" placeholder="youremail@example.com" onChange={handleChange} value={formData.email || ""} type="email" />
             </LabelInputContainer>
 
             <LabelInputContainer className="mb-4">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" placeholder="••••••••" type="password" />
+              <Input id="password" placeholder="••••••••" onChange={handleChange} value={formData.password || ""} type="password" />
             </LabelInputContainer>
 
             <button

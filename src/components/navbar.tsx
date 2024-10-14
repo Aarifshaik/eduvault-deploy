@@ -36,6 +36,7 @@ export const Navbar = () => {
   const [likeCount, setLikeCount] = useState();
   const [hearts, setHearts] = useState<number[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [name, setName] = useState("Guest");
 
   // Simulating an authentication check
   useEffect(() => {
@@ -48,6 +49,7 @@ export const Navbar = () => {
         if (data.isLoggedIn) {
           // User is logged in, handle the logged-in state
           setIsLoggedIn(true);
+          setName(data.name);
           console.log('User is logged in:', data);
         } else {
           setIsLoggedIn(false);
@@ -228,7 +230,7 @@ export const Navbar = () => {
       </NavbarContent>
 
   
-      {isLoggedIn && <Profile />}
+      {isLoggedIn && <Profile name={name}/>}
 
 
       <NavbarMenu>

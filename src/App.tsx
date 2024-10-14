@@ -6,8 +6,9 @@ import LoginPage from "@/pages/login";
 import BlogPage from "@/pages/blog";
 import AboutPage from "@/pages/about";
 import AdminPage from "@/pages/admin";
-import { NavbarDemo } from "./pages/navbardemo";
+// import { NavbarDemo } from "./pages/navbardemo";
 import DemoPage from "./pages/demo";
+import PostOauthRegPage from "./pages/postOauthReg";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
       <Route element={<BlogPage />} path="/blog" />
       <Route element={<AboutPage />} path="/about" />
       <Route element={<AdminPage />} path="/admin" />
-      <Route element={<NavbarDemo />} path="/navbardemo" />
+      {/* <Route element={<NavbarDemo />} path="/navbardemo" /> */}
+      <Route element={<PostOauthRegPage />} path="/postOauthReg" />
       <Route element={<DemoPage />} path="/demo" />
     </Routes>
   );
