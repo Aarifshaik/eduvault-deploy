@@ -21,14 +21,58 @@ export default function LoginPage() {
   };
   
   
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  interface FormData {
+    email: string;
+    password: string;
+  }
+
+  interface LoginResponse {
+    token: any;
+    isLoggedIn: boolean;
+    message?: string;
+    // Add other fields from the response if necessary
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = {
-      email: formData.email,
+      username: formData.email,
       password: formData.password,
     };
-    console.log(user);
+  
+    try {
+      const response = await fetch("http://localhost:8080/db/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      // console.log(response)
+  
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+  
+      const data: LoginResponse = await response.json();
+      if (data.token) {
+        // Store JWT token securely (e.g., localStorage or cookies)
+        localStorage.setItem("token", data.token);
+        console.log(data)
+  
+        // Redirect to protected route
+        window.location.reload();
+        // window.location.replace("/eduvault-deploy/demo");
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login", error);
+      // Display error message to user
+      // setError("Invalid credentials or server error");
+    }
   };
+  
   
 
   return (
@@ -80,7 +124,8 @@ export default function LoginPage() {
               <button
                 className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                 type="submit"
-                onClick={() => window.location.replace("http://localhost:8080/oauth2/authorization/google")}
+                // onClick={() => window.location.replace("http://localhost:8080/oauth2/authorization/google")}
+                onClick={() => window.location.replace("http://localhost:8080/oauth/login")}
               >
                 <GoogleLogo className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
                 <span className="text-neutral-700 dark:text-neutral-300 text-sm">

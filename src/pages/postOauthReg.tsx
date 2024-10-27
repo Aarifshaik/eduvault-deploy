@@ -5,43 +5,122 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
+
+import { useNavigate } from 'react-router-dom';
+
 import {Select, SelectItem} from "@nextui-org/select";
+import { SharedSelection } from "@nextui-org/system";
+// import { avatar } from "@nextui-org/theme";
 
 export default function PostOauthRegPage() {
-  const [userData, setUserData] = useState({
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     avatar: "",
-    institution: "",
-    dept: "",
+    username: "",
+    // password: "",
     role: "",
+    institution: "",
+    department: "",
   });
+
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [id]: value }));
+  };
+
+  const handleSelectChange = (keys: SharedSelection) => {
+    const value = Array.from(keys)[0]; // Get the first selected key
+    setFormData((prevData) => ({ ...prevData, role: value as string })); // Set role in formData
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Prepare the payload for the POST request
+    const requestData = {
+      username: formData.username,
+      name: formData.name,
+      email: formData.email,
+      // password: formData.password,
+      institution: formData.institution,
+      department: formData.department,
+      role: formData.role, // Assume role can be changed based on user type
+      picture: formData.avatar,
+    };
+
+    try {
+      // Send POST request to Spring backend
+      const response = await fetch('http://localhost:8080/db/addOauth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(requestData),  // Convert object to form URL encoding
+      });
+
+      if (response.ok) {
+        const result = await response.text();  // Backend returns a string like "Inserted"
+        console.log('Registration Success:', result);
+        navigate("/demo");
+        // Optionally, handle success, e.g., redirect to another page or display a success message
+      } else {
+        const errorText = await response.text();
+        console.error('Registration Failed:', errorText);
+        // Handle error, e.g., show error message to the user
+      }
+    } catch (error) {
+      console.error('Network Error:', error);
+      // Handle network errors, e.g., show a user-friendly error message
+    }
+  };
+
 
   // Simulating fetching data from OAuth
   useEffect(() => {
-    // Assume these values come from the OAuth provider
-    const oauthData = {
-      name: "Aarif Shaik",
-      email: "skaarif1419@amail.com",
-      avatar: "https://i.pravatar.cc/150?u=johndoe",
+    const fetchData = async () => {
+      const token = localStorage.getItem("token"); 
+      try {
+        const response = await fetch("http://localhost:8080/db/sendOauthUser", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Name : "+data.name);
+          console.log("Email : "+data.email);
+          console.log("Picture : "+data.picture);
+          
+          // setUserData(data);
+          const oauthData = {
+            name: data.name,
+            email: data.email,
+            avatar: data.picture,
+          };
+          setFormData({
+            ...formData,
+            name: oauthData.name,
+            email: oauthData.email,
+            avatar: oauthData.avatar,
+          });
+
+          
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
     };
-    setUserData({
-      ...userData,
-      name: oauthData.name,
-      email: oauthData.email,
-      avatar: oauthData.avatar,
-    });
+
+    fetchData();
   }, []);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted:", userData);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
-  };
 
   return (
     <DefaultLayout>
@@ -51,7 +130,7 @@ export default function PostOauthRegPage() {
         </div>
         <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
           <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-            Welcome, {userData.name}!
+            Welcome, {formData.name}!
           </h2>
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
             Please provide additional information to complete your registration.
@@ -63,7 +142,7 @@ export default function PostOauthRegPage() {
               <Input
                 id="email"
                 name="email"
-                value={userData.email}
+                value={formData.email}
                 type="email"
                 readOnly
               />
@@ -71,25 +150,27 @@ export default function PostOauthRegPage() {
 
             <LabelInputContainer className="mb-4">
                 <Label htmlFor="username">Username</Label>
-                <Input id="username" placeholder="Aarif1419" type="text" />
+                <Input id="username" value={formData.username} onChange={handleChange} placeholder="Aarif1419" type="text" />
             </LabelInputContainer>
             
-            <LabelInputContainer className="mb-4">
+            {/* <LabelInputContainer className="mb-4">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" placeholder="••••••••" type="password" />
-            </LabelInputContainer>
+                <Input id="password" value={formData.password} onChange={handleChange} placeholder="••••••••" type="password" />
+            </LabelInputContainer> */}
 
             <LabelInputContainer className="mb-4">
-            <Label htmlFor="role">Role</Label>
-                <Select
+              <Label htmlFor="role">Role</Label>
+              <Select
                 radius="sm"
                 placeholder="Select a Role"
-                aria-label="Select the Role"
-                >
-                    <SelectItem key="student">Student</SelectItem>
-                    <SelectItem key="educator">Educator</SelectItem>
-                    <SelectItem key="researcher">Researcher</SelectItem>
-                </Select>
+                selectedKeys={[formData.role]}
+                aria-label="Select your role"
+                onSelectionChange={(keys) => handleSelectChange(keys)}
+              >
+                <SelectItem key="Student">Student</SelectItem>
+                <SelectItem key="Educator">Educator</SelectItem>
+                <SelectItem key="Researcher">Researcher</SelectItem>
+              </Select>
             </LabelInputContainer>
 
             <LabelInputContainer className="mb-4">
@@ -98,18 +179,18 @@ export default function PostOauthRegPage() {
                 id="institution"
                 name="institution"
                 placeholder="KL University"
-                value={userData.institution}
+                value={formData.institution}
                 onChange={handleChange}
               />
             </LabelInputContainer>
 
             <LabelInputContainer className="mb-4">
-              <Label htmlFor="dept">Department (optional)</Label>
+              <Label htmlFor="department">Department (optional)</Label>
               <Input
-                id="dept"
-                name="dept"
+                id="department"
+                name="department"
                 placeholder="CSE / ECS / ECE"
-                value={userData.dept}
+                value={formData.department}
                 onChange={handleChange}
               />
             </LabelInputContainer>

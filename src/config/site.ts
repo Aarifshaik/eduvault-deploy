@@ -5,7 +5,7 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "EduVault",
   description: "Make beautiful websites regardless of your design experience.",
-  navItems: [
+  GeneralNav: [
     {
       label: "Home",
       href: "/",
@@ -35,36 +35,116 @@ export const siteConfig = {
     //   href: "/register",
     // },
   ],
-  usernavItems: [
+  StuNavItems: [
     {
       label: "Home",
-      href: "/Stuhome",
+      href: "/student/home",
     },
     {
-      label: "My Resources",
-      href: "/Sturesources",
-    },
-    {
-      label: "Login",
-      href: "/",
-    },
-    {
-      label: "Blog",
+      label: "Resources",
       href: "/blog",
     },
     {
-      label: "Upload",
-      href: "/about",
+      label: "Bookshelf",
+      href: "/student/bookshelf",
     },
     {
-      label: "Admin",
-      href: "/admin",
+      label: "Groups",
+      href: "/student/study-groups",
+    },
+    {
+      label: "Help",
+      href: "/student/support",
     },
     // {
-    //   label: "Register",
-    //   href: "/register",
+    //   label: "Download Resources",
+    //   href: "/student/downloads",
     // },
   ],
+
+  EduNavItems: [
+    {
+      label: "Home",
+      href: "/educator/home",
+    },
+    {
+      label: "Resource Browse",
+      href: "/educator/resources",
+    },
+    {
+      label: "My Course Materials",
+      href: "/educator/course-materials",
+    },
+    {
+      label: "Assignment Submission",
+      href: "/educator/assignments",
+    },
+    {
+      label: "Student Progress Tracking",
+      href: "/educator/student-progress",
+    },
+    {
+      label: "Help/Support",
+      href: "/educator/support",
+    },
+  ],
+
+  ResNavItems: [
+    {
+      label: "Home",
+      href: "/researcher/home",
+    },
+    {
+      label: "Advanced Search",
+      href: "/researcher/advanced-search",
+    },
+    {
+      label: "Research Papers",
+      href: "/researcher/research-papers",
+    },
+    {
+      label: "Collaboration Tools",
+      href: "/researcher/collaboration",
+    },
+    {
+      label: "My Research Projects",
+      href: "/researcher/projects",
+    },
+    {
+      label: "Help/Support",
+      href: "/researcher/support",
+    },
+  ],
+
+  AdminNavItems: [
+    {
+      label: "Home",
+      href: "/admin/home",
+    },
+    {
+      label: "User Management",
+      href: "/admin/user-management",
+    },
+    {
+      label: "Resource Management",
+      href: "/admin/resource-management",
+    },
+    {
+      label: "Analytics",
+      href: "/admin/analytics",
+    },
+    {
+      label: "Settings",
+      href: "/admin/settings",
+    },
+    {
+      label: "Help/Support",
+      href: "/admin/support",
+    },
+  ],
+  
+  
+
   navMenuItems: [
     {
       label: "Profile",

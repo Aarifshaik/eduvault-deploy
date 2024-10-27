@@ -8,12 +8,17 @@ import { cn } from "@/lib/utils";
 import { Select, SelectItem } from "@nextui-org/select";
 import { GitHubLogin, GoogleLogo, DiscordLogin } from "@/components/icons";
 import { SharedSelection } from "@nextui-org/system";
+// import { avatar } from "@nextui-org/theme";
+
+// interface SignupPageProps {
+//   handleLogin: () => void;
+// }
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    name: "",
     email: "",
+    avatar:"",
     username: "",
     password: "",
     role: "",
@@ -27,13 +32,50 @@ export default function SignupPage() {
   };
 
   const handleSelectChange = (keys: SharedSelection) => {
-    const value = Array.from(keys).join(", ");
-    setFormData((prevData) => ({ ...prevData, role: value }));
+    const value = Array.from(keys)[0]; // Get the first selected key
+    setFormData((prevData) => ({ ...prevData, role: value as string })); // Set role in formData
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("User Data:", formData);
+    console.log('Form Data:', formData);
+
+    // Prepare the payload for the POST request
+    const requestData = {
+      username: formData.username,
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      institution: formData.institution,
+      department: formData.department,
+      picture:"",
+      role: formData.role, // Assume role can be changed based on user type
+    };
+
+    try {
+      // Send POST request to Spring backend
+      const response = await fetch('http://localhost:8080/db/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(requestData),  // Convert object to form URL encoding
+      });
+
+      if (response.ok) {
+        const result = await response.text();  // Backend returns a string like "Inserted"
+        console.log('Registration Success:', result);
+        // handleLogin();
+        // Optionally, handle success, e.g., redirect to another page or display a success message
+      } else {
+        const errorText = await response.text();
+        console.error('Registration Failed:', errorText);
+        // Handle error, e.g., show error message to the user
+      }
+    } catch (error) {
+      console.error('Network Error:', error);
+      // Handle network errors, e.g., show a user-friendly error message
+    }
   };
 
   return (
@@ -55,22 +97,12 @@ export default function SignupPage() {
           <form className="my-8" onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
               <LabelInputContainer>
-                <Label htmlFor="firstname">First name</Label>
+                <Label htmlFor="name">Name</Label>
                 <Input
-                  id="firstname"
+                  id="name"
                   placeholder="Aa"
                   type="text"
-                  value={formData.firstname}
-                  onChange={handleChange}
-                />
-              </LabelInputContainer>
-              <LabelInputContainer>
-                <Label htmlFor="lastname">Last name</Label>
-                <Input
-                  id="lastname"
-                  placeholder="Shaik"
-                  type="text"
-                  value={formData.lastname}
+                  value={formData.name}
                   onChange={handleChange}
                 />
               </LabelInputContainer>
@@ -117,9 +149,9 @@ export default function SignupPage() {
                 aria-label="Select your role"
                 onSelectionChange={(keys) => handleSelectChange(keys)}
               >
-                <SelectItem key="student">Student</SelectItem>
-                <SelectItem key="educator">Educator</SelectItem>
-                <SelectItem key="researcher">Researcher</SelectItem>
+                <SelectItem key="Student">Student</SelectItem>
+                <SelectItem key="Educator">Educator</SelectItem>
+                <SelectItem key="Researcher">Researcher</SelectItem>
               </Select>
             </LabelInputContainer>
 
@@ -170,7 +202,7 @@ export default function SignupPage() {
           <button
             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="submit"
-            onClick={() => window.location.replace("http://localhost:8080/oauth2/authorization/google")}
+            onClick={() => window.location.replace("http://localhost:8080/oauth/login")}
           >
             <GoogleLogo className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">

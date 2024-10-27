@@ -37,28 +37,49 @@ export const Navbar = () => {
   const [hearts, setHearts] = useState<number[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState("Guest");
+  const[username, setUsername] = useState("guest");
+  const [avatar, setAvatar] = useState("");
+  // interface UserData {
+  //   name: string;
+  //   username: string;
+  //   picture: string;
+  // }
+  // const [userData, setUserData] = useState<UserData | null>(null);
 
-  // Simulating an authentication check
   useEffect(() => {
-    fetch("http://localhost:8080/loggedCheck", {
-      method: 'GET',
-      credentials: 'include'  // Include cookies for session-based authentication
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.isLoggedIn) {
-          // User is logged in, handle the logged-in state
-          setIsLoggedIn(true);
+    const token = localStorage.getItem("token");
+    const regStatus = localStorage.getItem("registered");
+    console.log("Token in navbar  "+token);
+    console.log("Reg in navbar  "+regStatus);
+    const fetchUserData = async () => {
+      if(token && regStatus=="true"){
+      try {
+        const response = await fetch("http://localhost:8080/db/userdata", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setAvatar(data.picture);
           setName(data.name);
-          console.log('User is logged in:', data);
+          setUsername(data.username);
+          
         } else {
-          setIsLoggedIn(false);
-          // User is not logged in
-          console.log('User is not logged in');
+          console.error("Failed to fetch user data");
         }
-      })
-      .catch(error => console.error('Error:', error));
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+    };
+  
+    fetchUserData();
   }, []);
+
   
 
   const handleHeartButtonClick = async () => {
@@ -72,57 +93,57 @@ export const Navbar = () => {
 
     // alert("Coming soon!");
 
-    try {
-      const response = await fetch('http://localhost:8080/api/like', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    // try {
+    //   const response = await fetch('http://localhost:8080/api/like', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   });
     
-      if (response.ok) {
-        const data = await response.json();
-        setLikeCount(data); // Update the state with the new like count
-        console.log(`Updated like count: ${data}`); 
-      } else {
-        console.error('Failed to increment like count:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error making request to increment like count:', error);
-    }
+    //   if (response.ok) {
+    //     const data = await response.json();
+    //     setLikeCount(data); // Update the state with the new like count
+    //     console.log(`Updated like count: ${data}`); 
+    //   } else {
+    //     console.error('Failed to increment like count:', response.statusText);
+    //   }
+    // } catch (error) {
+    //   console.error('Error making request to increment like count:', error);
+    // }
   };
 
-  useEffect(() => {
-    const fetchInitialLikeCount = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/likeCount');
-        const data = await response.json();
+  // useEffect(() => {
+  //   const fetchInitialLikeCount = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:8080/api/likeCount');
+  //       const data = await response.json();
         
-        if (response.ok) {
-          setLikeCount(data); // data is already the like count
-        } else {
-          throw new Error(response.statusText);
-        }
-      } catch (error) {
-        console.error('Error fetching initial like count:', error);
-      }
-    };
-  
-    fetchInitialLikeCount();
-  }, []);
-
-  // const generateRandomStyle = () => {
-  //   const duration = Math.random() * 2 + 2; // Random duration between 2s and 4s
-  //   const delay = Math.random() * 0.5; // Random delay between 0s and 0.5s
-  //   const xMovement = Math.random() * 20 - 10; // Random horizontal movement between -10px and 10px
-  //   const scale = Math.random() * 0.5 + 0.75; // Random scale between 0.75 and 1.25
-
-  //   return {
-  //     animationDuration: `${duration}s`,
-  //     animationDelay: `${delay}s`,
-  //     transform: `translateX(${xMovement}px) scale(${scale})`,
+  //       if (response.ok) {
+  //         setLikeCount(data); // data is already the like count
+  //       } else {
+  //         throw new Error(response.statusText);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching initial like count:', error);
+  //     }
   //   };
-  // };
+  
+  //   fetchInitialLikeCount();
+  // }, []);
+
+  const generateRandomStyle = () => {
+    const duration = Math.random() * 2 + 2; // Random duration between 2s and 4s
+    const delay = Math.random() * 0.5; // Random delay between 0s and 0.5s
+    const xMovement = Math.random() * 20 - 10; // Random horizontal movement between -10px and 10px
+    const scale = Math.random() * 0.5 + 0.75; // Random scale between 0.75 and 1.25
+
+    return {
+      animationDuration: `${duration}s`,
+      animationDelay: `${delay}s`,
+      transform: `translateX(${xMovement}px) scale(${scale})`,
+    };
+  };
 
 
   const searchInput = (
@@ -160,7 +181,7 @@ export const Navbar = () => {
           </Link>
         </NavbarBrand>
         <div className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map((item) => (
+          {siteConfig.GeneralNav.map((item) => (
             <NavbarItem key={item.href}>
               <Link
                 className={clsx(
@@ -230,7 +251,7 @@ export const Navbar = () => {
       </NavbarContent>
 
   
-      {isLoggedIn && <Profile name={name}/>}
+      {username!=="guest" && <Profile name={name} avatar={avatar} username={username}/>}
 
 
       <NavbarMenu>
