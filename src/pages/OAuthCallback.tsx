@@ -1,6 +1,6 @@
 // src/components/OAuthCallback.js
 
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import DefaultLayout from "@/layouts/default";
 
 import { useNavigate } from 'react-router-dom';

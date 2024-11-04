@@ -21,12 +21,6 @@ export default function LoginPage() {
       [e.target.id]: e.target.value, // use `id` as key (email, password)
     });
   };
-  
-  
-  interface FormData {
-    email: string;
-    password: string;
-  }
 
   interface LoginResponse {
     token: any;
