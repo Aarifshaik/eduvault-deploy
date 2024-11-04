@@ -38,7 +38,7 @@ export const siteConfig = {
   StuNavItems: [
     {
       label: "Home",
-      href: "/student/home",
+      href: "/stuhome",
     },
     {
       label: "Resources",
@@ -46,47 +46,63 @@ export const siteConfig = {
     },
     {
       label: "Bookshelf",
-      href: "/student/bookshelf",
+      href: "/stubookshelf",
     },
     {
-      label: "Groups",
-      href: "/student/study-groups",
+      label: "Assignments",
+      href: "/assignments",
+    },
+    {
+      label: "Help",
+      href: "/student/support",
+    },
+  ],
+
+  EduNavItems: [
+    {
+      label: "Home",
+      href: "/stuhome",
+    },
+    {
+      label: "Resources",
+      href: "/blog",
+    },
+    {
+      label: "Bookshelf",
+      href: "/stubookshelf",
+    },
+    {
+      label: "Assignments",
+      href: "/assignments",
     },
     {
       label: "Help",
       href: "/student/support",
     },
     // {
-    //   label: "Download Resources",
-    //   href: "/student/downloads",
+    //   label: "Home",
+    //   href: "/educator/home",
     // },
-  ],
-
-  EduNavItems: [
-    {
-      label: "Home",
-      href: "/educator/home",
-    },
-    {
-      label: "Resource Browse",
-      href: "/educator/resources",
-    },
-    {
-      label: "My Course Materials",
-      href: "/educator/course-materials",
-    },
-    {
-      label: "Assignment Submission",
-      href: "/educator/assignments",
-    },
-    {
-      label: "Student Progress Tracking",
-      href: "/educator/student-progress",
-    },
-    {
-      label: "Help/Support",
-      href: "/educator/support",
-    },
+    // {
+    //   label: "Resource Browse",
+    //   href: "/educator/resources",
+    // },
+    // {
+    //   label: "My Course Materials",
+    //   href: "/educator/course-materials",
+    // },
+    // {
+    //   label: "Assignment Submission",
+    //   href: "/educator/assignments",
+    // },
+    // {
+    //   label: "Student Progress Tracking",
+    //   href: "/educator/student-progress",
+    // },
+    // {
+    //   label: "Help/Support",
+    //   href: "/educator/support",
+    // },
   ],
 
   ResNavItems: [
@@ -179,6 +195,22 @@ export const siteConfig = {
       href: "/logout",
     },
   ],
+
+  getNavItemsByRole: function (role: string) {
+    switch (role) {
+      case "Student":
+        return this.StuNavItems;
+      case "Educator":
+        return this.EduNavItems;
+      case "Researcher":
+        return this.ResNavItems;
+      case "Admin":
+        return this.AdminNavItems;
+      default:
+        return this.GeneralNav;
+    }
+  },
+
   links: {
     github: "https://github.com/Aarifshaik/eduvault-deploy.git",
     // twitter: "https://twitter.com/getnextui",
@@ -189,4 +221,6 @@ export const siteConfig = {
     sponsor: "https://patreon.com/jrgarciadev",
     browse: "/blog"
   },
+
+
 };

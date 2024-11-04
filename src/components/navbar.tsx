@@ -27,30 +27,26 @@ import { Logo } from "@/components/icons";
 import { useState } from "react";
 import {useEffect} from "react";
 import "./heart.css";
-
-// import { AvatarWithText } from "./materialTailwind/avatar";
 import Profile from "./materialTailwind/profiledropdown";
 
 
 export const Navbar = () => {
   const [likeCount, setLikeCount] = useState();
   const [hearts, setHearts] = useState<number[]>([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState("Guest");
   const[username, setUsername] = useState("guest");
   const [avatar, setAvatar] = useState("");
-  // interface UserData {
-  //   name: string;
-  //   username: string;
-  //   picture: string;
-  // }
-  // const [userData, setUserData] = useState<UserData | null>(null);
+  const [NavItems, setNavItems] = useState<{ label: string; href: string }[]>([]);
+  const [role, setRole] = useState("guest");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const regStatus = localStorage.getItem("registered");
-    console.log("Token in navbar  "+token);
-    console.log("Reg in navbar  "+regStatus);
+    
+    // setNavItems(siteConfig.getNavItemsByRole("Student"));
+    // const NavItems = siteConfig.getNavItemsByRole("student");
+    
+    
     const fetchUserData = async () => {
       if(token && regStatus=="true"){
       try {
@@ -63,7 +59,13 @@ export const Navbar = () => {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+          // console.log(data);
+          localStorage.setItem("name",data.name);
+          localStorage.setItem("username",data.username);
+          // localStorage.setItem("avatar",data.picture);
+          localStorage.setItem("role",data.role);
+          setRole(data.role);
+          
           setAvatar(data.picture);
           setName(data.name);
           setUsername(data.username);
@@ -93,44 +95,44 @@ export const Navbar = () => {
 
     // alert("Coming soon!");
 
-    // try {
-    //   const response = await fetch('http://localhost:8080/api/like', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   });
+    try {
+      const response = await fetch('http://localhost:8080/api/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     setLikeCount(data); // Update the state with the new like count
-    //     console.log(`Updated like count: ${data}`); 
-    //   } else {
-    //     console.error('Failed to increment like count:', response.statusText);
-    //   }
-    // } catch (error) {
-    //   console.error('Error making request to increment like count:', error);
-    // }
+      if (response.ok) {
+        const data = await response.json();
+        setLikeCount(data); // Update the state with the new like count
+        console.log(`Updated like count: ${data}`); 
+      } else {
+        console.error('Failed to increment like count:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error making request to increment like count:', error);
+    }
   };
 
-  // useEffect(() => {
-  //   const fetchInitialLikeCount = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:8080/api/likeCount');
-  //       const data = await response.json();
+  useEffect(() => {
+    const fetchInitialLikeCount = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/likeCount');
+        const data = await response.json();
         
-  //       if (response.ok) {
-  //         setLikeCount(data); // data is already the like count
-  //       } else {
-  //         throw new Error(response.statusText);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching initial like count:', error);
-  //     }
-  //   };
+        if (response.ok) {
+          setLikeCount(data); // data is already the like count
+        } else {
+          throw new Error(response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching initial like count:', error);
+      }
+    };
   
-  //   fetchInitialLikeCount();
-  // }, []);
+    fetchInitialLikeCount();
+  }, []);
 
   const generateRandomStyle = () => {
     const duration = Math.random() * 2 + 2; // Random duration between 2s and 4s
@@ -181,7 +183,8 @@ export const Navbar = () => {
           </Link>
         </NavbarBrand>
         <div className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.GeneralNav.map((item) => (
+          {siteConfig.getNavItemsByRole(role).map((item) => (
+          // {/* {NavItems.map((item) => ( */}
             <NavbarItem key={item.href}>
               <Link
                 className={clsx(

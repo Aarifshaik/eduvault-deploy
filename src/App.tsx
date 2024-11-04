@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import IndexPage from "@/pages/index";
+import StudentHomePage from "@/pages/stuhome";
 import SignupPage from "@/pages/signup";
 import LoginPage from "@/pages/login";
 import BlogPage from "@/pages/blog";
@@ -62,6 +63,11 @@ function App() {
         <Route element={<OAuthCallback />} path="/callback" />
         <Route element={<AboutPage />} path="/about" />
         <Route element={<AdminPage />} path="/admin" />
+        
+        
+        <Route element={<StudentHomePage />} path="/stuhome" />
+        
+      
       </Routes>
 
       {isLoaded && (

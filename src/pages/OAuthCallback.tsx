@@ -39,7 +39,7 @@ const OAuthCallback = () => {
         navigate("/postOauthReg");
       } else {
         // window.location.replace("/eduvault-deploy/demo");
-        navigate("/blog");
+        navigate("/stuhome");
       }
     }, 1000);
   }

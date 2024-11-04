@@ -6,8 +6,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { GitHubLogin ,GoogleLogo,DiscordLogin} from "@/components/icons";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
@@ -61,8 +63,10 @@ export default function LoginPage() {
         console.log(data)
   
         // Redirect to protected route
-        window.location.reload();
-        // window.location.replace("/eduvault-deploy/demo");
+        // window.location.reload();
+        // window.location.replace("/eduvault-deploy/stuhome");
+        navigate("/stuhome");
+
       } else {
         console.log("Login failed");
       }

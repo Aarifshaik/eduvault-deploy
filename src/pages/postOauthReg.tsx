@@ -19,7 +19,6 @@ export default function PostOauthRegPage() {
     email: "",
     avatar: "",
     username: "",
-    // password: "",
     role: "",
     institution: "",
     department: "",
@@ -44,7 +43,6 @@ export default function PostOauthRegPage() {
       username: formData.username,
       name: formData.name,
       email: formData.email,
-      // password: formData.password,
       institution: formData.institution,
       department: formData.department,
       role: formData.role, // Assume role can be changed based on user type
