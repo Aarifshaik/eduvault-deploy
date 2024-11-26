@@ -18,10 +18,10 @@ export const siteConfig = {
       label: "Login",
       href: "/login",
     },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
+    // {
+    //   label: "Blog",
+    //   href: "/blog",
+    // },
     {
       label: "Upload",
       href: "/about",

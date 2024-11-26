@@ -10,6 +10,9 @@ import AdminPage from "@/pages/admin";
 // import { NavbarDemo } from "./pages/navbardemo";
 // import Demo from "./pages/demo";
 import PostOauthRegPage from "./pages/postOauthReg";
+import {SearchBooksPage} from "./pages/search/SearchBooksPage";
+
+
 import { useEffect, useState } from "react";
 
 import ProtectedRoute from '@/rules/ProtectedRoute';
@@ -66,6 +69,7 @@ function App() {
         
         
         <Route element={<StudentHomePage />} path="/stuhome" />
+        <Route element={<SearchBooksPage />} path="/search" />
         
       
       </Routes>

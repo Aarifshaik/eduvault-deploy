@@ -9,8 +9,31 @@ import { FlipWords } from "@/components/ui/flip-words";
 
 export default function StudentHomePage() {
   const user = localStorage.getItem("name");
+  // console.log(localStorage);
   console.log("User in stuhome  "+user);
   const words = ["Inspire", "Explore", "Achieve", "Succeed"];
+
+  const handleLogout = () => {
+
+    fetch("http://localhost:8080/cuslogout", {
+      method: 'GET',
+      credentials: 'include', // Include cookies (for session-based logout)
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log("Logged out successfully");
+          localStorage.clear();
+          console.log("token: "+localStorage.getItem("token"));
+          // navigate("/login")
+        } else {
+          console.error("Logout failed");
+        }
+      })
+      .catch(error => {
+        console.error("Error during logout:", error);
+      });
+    console.log("Logged out");
+  };
   
   return (
     <DefaultLayout>
@@ -39,7 +62,8 @@ export default function StudentHomePage() {
               radius: "full",
               variant: "shadow",
             })}
-            href="/student/resources"
+            // href="/student/resources"
+            onPress={handleLogout}
           >
             Browse Resources
           </Link>

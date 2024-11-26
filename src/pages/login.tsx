@@ -22,12 +22,6 @@ export default function LoginPage() {
     });
   };
 
-  interface LoginResponse {
-    token: any;
-    isLoggedIn: boolean;
-    message?: string;
-    // Add other fields from the response if necessary
-  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,10 +44,14 @@ export default function LoginPage() {
         throw new Error(await response.text());
       }
   
-      const data: LoginResponse = await response.json();
+      // const data: LoginResponse = await response.json();
+      const data = await response.json();
       if (data.token) {
         // Store JWT token securely (e.g., localStorage or cookies)
         localStorage.setItem("token", data.token);
+        localStorage.setItem("registered", data.registered);
+        localStorage.setItem("userType", data.userType);
+        
         console.log(data)
   
         // Redirect to protected route

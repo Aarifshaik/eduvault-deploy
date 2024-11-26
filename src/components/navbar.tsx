@@ -31,6 +31,7 @@ import Profile from "./materialTailwind/profiledropdown";
 
 
 export const Navbar = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [likeCount, setLikeCount] = useState();
   const [hearts, setHearts] = useState<number[]>([]);
   const [name, setName] = useState("Guest");
@@ -64,8 +65,9 @@ export const Navbar = () => {
           localStorage.setItem("username",data.username);
           // localStorage.setItem("avatar",data.picture);
           localStorage.setItem("role",data.role);
-          setRole(data.role);
           
+          setRole(data.role);
+          // console.log(data.role);
           setAvatar(data.picture);
           setName(data.name);
           setUsername(data.username);
@@ -81,6 +83,14 @@ export const Navbar = () => {
   
     fetchUserData();
   }, []);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term=event.target.value;
+    setSearchTerm(term);
+    // You can add additional logic here, like sending searchTerm to an API or filtering a list.
+    // console.log("Search Term:", term);
+    localStorage.setItem("searchTerm", term);
+  };
 
   
 
@@ -166,6 +176,8 @@ export const Navbar = () => {
         <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
       }
       type="search"
+      value={searchTerm}  // This makes it a controlled component
+      onChange={handleInputChange}  // The onChange handler
     />
   );
 
