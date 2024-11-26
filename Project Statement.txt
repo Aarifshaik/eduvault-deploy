@@ -1,0 +1,3 @@
+Create a web-based resource library for educational materials
+Design a platform to organize and provide access to educational materials like textbooks, research papers, and study guides. The library should be searchable and accessible to students and educators for enhancing learning and research.
+• Admin: Upload and organize educational resources, manage user access. • User: Search and access educational materials, download resources, provide feedback on materials.
