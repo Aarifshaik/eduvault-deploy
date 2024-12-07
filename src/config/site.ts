@@ -18,21 +18,17 @@ export const siteConfig = {
       label: "Login",
       href: "/login",
     },
+    {
+      label: "Browse",
+      href: "/blog",
+    },
     // {
-    //   label: "Blog",
-    //   href: "/blog",
+    //   label: "Upload",
+    //   href: "/upload",
     // },
-    {
-      label: "Upload",
-      href: "/about",
-    },
-    {
-      label: "Admin",
-      href: "/admin",
-    },
     // {
-    //   label: "Register",
-    //   href: "/register",
+    //   label: "Admin",
+    //   href: "/admin",
     // },
   ],
   StuNavItems: [
@@ -42,42 +38,34 @@ export const siteConfig = {
     },
     {
       label: "Resources",
-      href: "/blog",
+      href: "/resources",
     },
     {
       label: "Bookshelf",
       href: "/stubookshelf",
     },
     {
-      label: "Assignments",
-      href: "/assignments",
-    },
-    {
       label: "Help",
-      href: "/student/support",
+      href: "/studentsupport",
     },
   ],
 
   EduNavItems: [
     {
       label: "Home",
-      href: "/stuhome",
+      href: "/eduhome",
     },
     {
       label: "Resources",
       href: "/blog",
     },
     {
-      label: "Bookshelf",
-      href: "/stubookshelf",
-    },
-    {
-      label: "Assignments",
-      href: "/assignments",
+      label: "Assign",
+      href: "/educatorassign",
     },
     {
       label: "Help",
-      href: "/student/support",
+      href: "/edusupport",
     },
     // {
     //   label: "Home",
@@ -108,27 +96,31 @@ export const siteConfig = {
   ResNavItems: [
     {
       label: "Home",
-      href: "/researcher/home",
+      href: "/reshome",
+    },
+    // {
+    //   label: "Advanced Search",
+    //   href: "/researcher/advanced-search",
+    // },
+    {
+      label: "All Resources",
+      href: "/blog",
     },
     {
-      label: "Advanced Search",
-      href: "/researcher/advanced-search",
+      label: "My Publications",
+      href: "/respubBooks",
     },
+    // {
+    //   label: "Collaboration Tools",
+    //   href: "/researcher/collaboration",
+    // },
     {
-      label: "Research Papers",
-      href: "/researcher/research-papers",
-    },
-    {
-      label: "Collaboration Tools",
-      href: "/researcher/collaboration",
-    },
-    {
-      label: "My Research Projects",
-      href: "/researcher/projects",
+      label: "Upload Resource",
+      href: "/upload",
     },
     {
       label: "Help/Support",
-      href: "/researcher/support",
+      href: "/ressupport",
     },
   ],
 
@@ -145,14 +137,14 @@ export const siteConfig = {
       label: "Resource Management",
       href: "/admin/resource-management",
     },
-    {
-      label: "Analytics",
-      href: "/admin/analytics",
-    },
-    {
-      label: "Settings",
-      href: "/admin/settings",
-    },
+    // {
+    //   label: "Analytics",
+    //   href: "/admin/analytics",
+    // },
+    // {
+    //   label: "Settings",
+    //   href: "/admin/settings",
+    // },
     {
       label: "Help/Support",
       href: "/admin/support",

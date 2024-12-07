@@ -10,7 +10,7 @@ import { FlipWords } from "@/components/ui/flip-words";
 export default function StudentHomePage() {
   const user = localStorage.getItem("name");
   // console.log(localStorage);
-  console.log("User in stuhome  "+user);
+  // console.log("User in stuhome  "+user);
   const words = ["Inspire", "Explore", "Achieve", "Succeed"];
 
   const handleLogout = () => {
@@ -78,8 +78,8 @@ export default function StudentHomePage() {
         <div className="mt-8">
           <Snippet hideCopyButton hideSymbol variant="bordered">
             <span>
-              Check your latest <Code color="primary">Assignments</Code> and{" "}
-              <Code color="primary">Upcoming Events</Code>
+              Check latest <Code color="primary">Resources</Code> and{" "}
+              <Code color="primary">Your Bookshelf</Code>
             </span>
           </Snippet>
         </div>

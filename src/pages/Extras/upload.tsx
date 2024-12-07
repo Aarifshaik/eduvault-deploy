@@ -5,7 +5,7 @@ import { FileUpload } from "@/components/ui/fileupload";
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 
-export default function DocsPage() {
+export default function UploadPage() {
   const [files, setFiles] = useState<File[]>([]);
 
   // Example usage of 'files' state

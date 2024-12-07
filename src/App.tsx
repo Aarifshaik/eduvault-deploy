@@ -1,23 +1,24 @@
 import { Route, Routes } from "react-router-dom";
 
-import IndexPage from "@/pages/index";
-import StudentHomePage from "@/pages/stuhome";
-import SignupPage from "@/pages/signup";
-import LoginPage from "@/pages/login";
-import BlogPage from "@/pages/blog";
-import AboutPage from "@/pages/about";
-import AdminPage from "@/pages/admin";
+import IndexPage from "@/pages/General/index";
+import StudentHomePage from "@/pages/Student/stuhome";
+import SignupPage from "@/pages/General/signup";
+import LoginPage from "@/pages/General/login";
+import BrowsePage from "@/pages/General/browse";
+import ResourcesPage from "@/pages/Educator/resources";
+import UploadPage from "@/pages/Extras/upload";
+// import AdminPage from "@/pages/admin";
 // import { NavbarDemo } from "./pages/navbardemo";
 // import Demo from "./pages/demo";
-import PostOauthRegPage from "./pages/postOauthReg";
-import {SearchBooksPage} from "./pages/search/SearchBooksPage";
+import PostOauthRegPage from "./pages/Validations/postOauthReg";
+// import {SearchBooksPage} from "./pages/search/SearchBooksPage";
 
 
 import { useEffect, useState } from "react";
 
 import ProtectedRoute from '@/rules/ProtectedRoute';
 
-import OAuthCallback from "./pages/OAuthCallback";
+import OAuthCallback from "./pages/Validations/OAuthCallback";
 
 
 function App() {
@@ -64,12 +65,14 @@ function App() {
         <Route element={<SignupPage />} path="/signup" />
         <Route element={<LoginPage />} path="/login" />
         <Route element={<OAuthCallback />} path="/callback" />
-        <Route element={<AboutPage />} path="/about" />
-        <Route element={<AdminPage />} path="/admin" />
+        <Route element={<UploadPage />} path="/upload" />
+        <Route element={<BrowsePage />} path="/blog" />
+        {/* <Route element={<AdminPage />} path="/admin" /> */}
         
         
         <Route element={<StudentHomePage />} path="/stuhome" />
-        <Route element={<SearchBooksPage />} path="/search" />
+        {/* <Route element={<SearchBooksPage />} path="/search" /> */}
+        <Route element={<ResourcesPage />} path="/resources" />
         
       
       </Routes>
@@ -78,8 +81,9 @@ function App() {
         <Routes>
           <Route path="/postOauthReg" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={<PostOauthRegPage />} />} />
           {/* <Route path="/demo" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={<Demo />} />} /> */}
-          <Route path="/blog" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={<BlogPage />} />} />
+          {/* <Route path="/blog" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={<BlogPage />} />} /> */}
           {/* <Route element={<NavbarDemo />} path="/navbardemo" /> */}
+          
         </Routes>
       )}
     </>

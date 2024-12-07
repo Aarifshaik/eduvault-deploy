@@ -14,6 +14,7 @@ import { SharedSelection } from "@nextui-org/system";
 
 export default function PostOauthRegPage() {
   const navigate = useNavigate();
+  const [checkName, setCheckName] = useState<string | null>("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -62,7 +63,7 @@ export default function PostOauthRegPage() {
       if (response.ok) {
         const result = await response.text();  // Backend returns a string like "Inserted"
         console.log('Registration Success:', result);
-        navigate("/demo");
+        navigate("/");
         // Optionally, handle success, e.g., redirect to another page or display a success message
       } else {
         const errorText = await response.text();
@@ -89,8 +90,10 @@ export default function PostOauthRegPage() {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log(response);
         if (response.ok) {
           const data = await response.json();
+          console.log(data)
           console.log("Name : "+data.name);
           console.log("Email : "+data.email);
           console.log("Picture : "+data.picture);
@@ -108,6 +111,8 @@ export default function PostOauthRegPage() {
             avatar: oauthData.avatar,
           });
 
+          setCheckName(null);
+          console.log("CheckNameeee....!!",checkName);
           
         } else {
           console.error("Failed to fetch user data");
@@ -119,6 +124,8 @@ export default function PostOauthRegPage() {
 
     fetchData();
   }, []);
+
+
 
   return (
     <DefaultLayout>
@@ -150,6 +157,13 @@ export default function PostOauthRegPage() {
                 <Label htmlFor="username">Username</Label>
                 <Input id="username" value={formData.username} onChange={handleChange} placeholder="Aarif1419" type="text" />
             </LabelInputContainer>
+
+            {checkName === null && (
+            <LabelInputContainer className="mb-4">
+                <Label htmlFor="username">Full Name</Label>
+                <Input id="name" value={formData.name} onChange={handleChange} placeholder="Aarif Shaik" type="text" />
+            </LabelInputContainer>
+            )}
             
             {/* <LabelInputContainer className="mb-4">
                 <Label htmlFor="password">Password</Label>

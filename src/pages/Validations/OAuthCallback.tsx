@@ -15,14 +15,18 @@ const OAuthCallback = () => {
         credentials: 'include',
       });
       const data = await response.json();
-      
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("registered", data.registered);
-      localStorage.setItem("userType", data.userType);
-      
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+      else{
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("registered", data.registered);
+        localStorage.setItem("userType", data.userType);
+      }
       handleRedirect(data);
     } catch (error) {
       console.error("Error fetching token:", error);
+      navigate("/");
     }
   };
   
@@ -34,6 +38,11 @@ const OAuthCallback = () => {
 
   function handleRedirect(data: { registered: boolean }) {
     setTimeout(() => {
+      console.log(data.registered);
+      if (data.registered === null) {
+        // window.location.replace("/eduvault-deploy/demo");
+        navigate("/");
+      }
       if (data.registered === false) {
         // window.location.replace("/eduvault-deploy/postOauthReg");
         navigate("/postOauthReg");

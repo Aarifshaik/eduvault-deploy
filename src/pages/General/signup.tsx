@@ -70,6 +70,7 @@ export default function SignupPage() {
       } else {
         const errorText = await response.text();
         console.error('Registration Failed:', errorText);
+        alert("error already present");
         // Handle error, e.g., show error message to the user
       }
     } catch (error) {
