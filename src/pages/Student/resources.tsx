@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectItem } from "@nextui-org/select";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { button } from "@nextui-org/theme";
+// import { button } from "@nextui-org/theme";
 
 export default function ResourcesPage() {
   interface CardType {
@@ -16,7 +16,7 @@ export default function ResourcesPage() {
     description: string;
     img: string;
     author: string;
-    pdfUrl: string;
+    // pdfUrl: string;
   }
 
   const [books, setBooks] = useState<CardType[]>([]);
@@ -54,12 +54,12 @@ export default function ResourcesPage() {
         .then((response) => {
           // console.log(response.data);
           const fetchedBooks = response.data.map(
-            (book: { title: string; img: string; author: string; description: string,pdfUrl:string }) => ({
+            (book: { title: string; img: string; author: string; description: string }) => ({
               title: book.title,
               author: book.author,
               img: book.img,
               description: book.description,
-              pdfUrl: book.pdfUrl,
+              // pdfUrl: book.pdfUrl,
             })
           );
           // console.log(fetchedBooks);

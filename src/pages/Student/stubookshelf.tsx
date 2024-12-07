@@ -1,87 +1,122 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import DefaultLayout from "@/layouts/default";
 import { FocusCards } from "@/components/ui/focus-card";
-import { cn } from "@/lib/utils";
-import { SharedSelection } from "@nextui-org/system";
-import { Label } from "@/components/ui/label";
-import { Select, SelectItem } from "@nextui-org/select";
+// import { cn } from "@/lib/utils";
+// import { SharedSelection } from "@nextui-org/system";
+// import { Label } from "@/components/ui/label";
+// import { Select, SelectItem } from "@nextui-org/select";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
+// import { button } from "@nextui-org/theme";
 
-export default function BookShelfPage() {
+export default function ResourcesPage() {
   interface CardType {
     title: string;
     description: string;
     img: string;
     author: string;
-    pdfUrl: string;
+    // pdfUrl: string;
   }
 
   const [books, setBooks] = useState<CardType[]>([]);
   const [selectedBook, setSelectedBook] = useState<number | null>(null);
-  const [category, setCategory] = useState<string | null>(null); // State for the selected category
-  const baseUrl: string = "http://localhost:8080/api/books/get";
-  const [searchTerm, setSearchTerm] = useState(localStorage.getItem("searchTerm") || "");
+  // const [category, setCategory] = useState<string | null>(null); // State for the selected category
+  const baseUrl: string = "http://localhost:8080/api/user-books";
+  // const [searchTerm, setSearchTerm] = useState(localStorage.getItem("searchTerm") || "");
+  const username = localStorage.getItem("username");
 
-  const categories = [
-    "All",
-    "Technology",
-    "Education",
-    "Cooking",
-    "History",
-    "Health",
-    "Science",
-    "Business",
-    "Art",
-    "Architecture",
-    "Finance",
-    "Hobby",
-    "Nature",
-    "Adventure",
-    "Marketing",
-    "Self-help",
-    "Environment",
-  ];
+  // const categories = [
+  //   "All",
+  //   "Technology",
+  //   "Education",
+  //   "Cooking",
+  //   "History",
+  //   "Health",
+  //   "Science",
+  //   "Business",
+  //   "Art",
+  //   "Architecture",
+  //   "Finance",
+  //   "Hobby",
+  //   "Nature",
+  //   "Adventure",
+  //   "Marketing",
+  //   "Self-help",
+  //   "Environment",
+  // ];
+
+  // useEffect(() => {
+  //   const fetchBooks = () => {
+  //     const categoryFilter = category ? `&category=${encodeURIComponent(category)}` : "";
+  //     const searchUrl = `${baseUrl}?title=${encodeURIComponent(searchTerm)}${categoryFilter}`;
+  //     axios
+  //       .get(searchUrl)
+  //       .then((response) => {
+  //         // console.log(response.data);
+  //         const fetchedBooks = response.data.map(
+  //           (book: { title: string; img: string; author: string; description: string }) => ({
+  //             title: book.title,
+  //             author: book.author,
+  //             img: book.img,
+  //             description: book.description,
+  //             // pdfUrl: book.pdfUrl,
+  //           })
+  //         );
+  //         // console.log(fetchedBooks);
+  //         setBooks(fetchedBooks);
+  //         console.log(fetchedBooks);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching books:", error);
+  //       });
+  //   };
+
+  //   fetchBooks();
+  // }, [searchTerm, category]); // Fetch books whenever searchTerm or category changes
 
   useEffect(() => {
     const fetchBooks = () => {
-      const categoryFilter = category ? `&category=${encodeURIComponent(category)}` : "";
-      const searchUrl = `${baseUrl}?title=${encodeURIComponent(searchTerm)}${categoryFilter}`;
+      // Construct the URL for fetching books for the user
+      const searchUrl = `${baseUrl}/user/${username}`; // Replace `baseUrl` with your actual base URL
+
       axios
         .get(searchUrl)
         .then((response) => {
-          const fetchedBooks = response.data.map(
-            (book: { title: string; img: string; author: string; description: string,pdfUrl:string }) => ({
-              title: book.title,
-              author: book.author,
-              img: book.img,
-              description: book.description,
-              pdfUrl: book.pdfUrl,
-            })
-          );
-          setBooks(fetchedBooks);
+          // Assuming the response is an array of books
+          const fetchedBooks = response.data.map((book:any) => ({
+            title: book.title,
+            author: book.author,
+            img: book.img,
+            description: book.description,
+            pdfUrl: book.pdfUrl,  // Include PDF URL if required
+          }));
+
+          setBooks(fetchedBooks);  // Update the state with the fetched books
+          console.log(fetchedBooks);  // Log the books to the console for debugging
         })
         .catch((error) => {
-          console.error("Error fetching books:", error);
+          console.error("Error fetching books:", error);  // Handle any errors
         });
     };
 
-    fetchBooks();
-  }, [searchTerm, category]); // Fetch books whenever searchTerm or category changes
+    if (username) {
+      fetchBooks();  // Fetch books only if `username` is provided
+    }
+  }, [username]); 
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const newSearchTerm = localStorage.getItem("searchTerm");
-      if (newSearchTerm !== searchTerm) {
-        setSearchTerm(newSearchTerm || "");
-      }
-    };
+  // useEffect(() => {
+  //   const handleStorageChange = () => {
+  //     const newSearchTerm = localStorage.getItem("searchTerm");
+  //     if (newSearchTerm !== searchTerm) {
+  //       setSearchTerm(newSearchTerm || "");
+  //     }
+  //   };
 
-    const intervalId = setInterval(handleStorageChange, 1000);
+  //   const intervalId = setInterval(handleStorageChange, 1000);
 
-    return () => clearInterval(intervalId);
-  }, [searchTerm]);
+  //   return () => clearInterval(intervalId);
+  // }, [searchTerm]);
 
   const handleClose = () => setSelectedBook(null);
 
@@ -89,19 +124,20 @@ export default function BookShelfPage() {
     console.log(`Downloading book: ${books[index].title}`);
     // Implement download logic here
   };
+  
 
-  const handleSelectBook = (keys: SharedSelection) => {
-    const value = Array.from(keys)[0] as string; // Get the selected key
-    if (value === "All") {
-        setCategory(null); // Reset category to show all data
-      } else {
-        setCategory(value); // Update the category state
-      }
-  };
-
+  // const handleSelectBook = (keys: SharedSelection) => {
+  //   const value = Array.from(keys)[0] as string; // Get the selected key
+  //   if (value === "All") {
+  //       setCategory(null); // Reset category to show all data
+  //     } else {
+  //       setCategory(value); // Update the category state
+  //     }
+  // };
+  // console.log("Rendering ResourcesPage");
   return (
     <DefaultLayout>
-      <LabelInputContainer
+      {/* <LabelInputContainer
         className="mb-4"
         style={{
             maxWidth: "300px",
@@ -122,11 +158,18 @@ export default function BookShelfPage() {
             </SelectItem>
             ))}
         </Select>
-        </LabelInputContainer>
+        </LabelInputContainer> */}
 
 
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <FocusCards cards={books} onCardClick={(index) => setSelectedBook(index)} onDownload={handleDownload}/>
+        {/* <FocusCards cards={books} onCardClick={(index) => setSelectedBook(index)}/> */}
+
+        <FocusCards
+          cards={books}
+          onCardClick={(index) => setSelectedBook(index)}
+          onDownload={(index) => handleDownload(index)} // Pass the download handler
+        />
+
 
         {/* Modal */}
         <Modal backdrop="blur" isOpen={selectedBook !== null} onClose={handleClose}>
@@ -146,19 +189,19 @@ export default function BookShelfPage() {
   );
 }
 
-const LabelInputContainer = ({
-    children,
-    className,
-    style,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-    style?: React.CSSProperties; // Allow passing custom styles
-  }) => {
-    return (
-      <div className={cn("flex flex-col space-y-2 w-full", className)} style={style}>
-        {children}
-      </div>
-    );
-  };
+// const LabelInputContainer = ({
+//     children,
+//     className,
+//     style,
+//   }: {
+//     children: React.ReactNode;
+//     className?: string;
+//     style?: React.CSSProperties; // Allow passing custom styles
+//   }) => {
+//     return (
+//       <div className={cn("flex flex-col space-y-2 w-full", className)} style={style}>
+//         {children}
+//       </div>
+//     );
+//   };
   

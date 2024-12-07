@@ -7,7 +7,7 @@ type CardType = {
   img: string;
   description: string;
   author: string;
-  pdfUrl: string;
+  // pdfUrl: string;
 };
 
 export const Card = React.memo(

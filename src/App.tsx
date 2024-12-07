@@ -5,10 +5,12 @@ import StudentHomePage from "@/pages/Student/stuhome";
 import SignupPage from "@/pages/General/signup";
 import LoginPage from "@/pages/General/login";
 import BrowsePage from "@/pages/General/browse";
-import ResourcesPage from "@/pages/Educator/resources";
+import ResourcesPage from "@/pages/Student/resources";
 import UploadPage from "@/pages/Extras/upload";
 import PostOauthRegPage from "./pages/Validations/postOauthReg";
 // import DownloadPdf from "./pages/Student/help";
+import EducatorHomePage from "./pages/Educator/home";
+import EducatorDashboard from "./pages/Educator/assign";
 
 import { useEffect, useState } from "react";
 
@@ -50,7 +52,7 @@ function App() {
     checkLogin();
   }
 }, [isAuthenticated]);
-// console.log(isAuthenticated);
+console.log(localStorage);
 
 
 
@@ -70,6 +72,11 @@ function App() {
         <Route element={<ResourcesPage />} path="/resources" />
         <Route element={<BookShelfPage />} path="/stubookshelf" />
         {/* <Route element={<DownloadPdf />} path="/help" /> */}
+
+
+        <Route element={<EducatorHomePage />} path="/eduhome" />
+        <Route element={<EducatorDashboard />} path="/educatorassign" />
+
         
         
         
