@@ -124,6 +124,7 @@ export default function BrowsePage() {
     description: string;
     img: string;
     author: string;
+    pdfUrl: string;
   }
 
   const [books, setBooks] = useState<CardType[]>([]);
@@ -151,6 +152,11 @@ export default function BrowsePage() {
     "Self-help",
     "Environment",
   ];
+
+  const handleDownload = (index: number) => {
+    console.log(`Downloading book: ${books[index].title}`);
+    // Implement download logic here
+  };
 
   useEffect(() => {
     const fetchBooks = () => {
@@ -228,7 +234,7 @@ export default function BrowsePage() {
 
 
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <FocusCards cards={books} onCardClick={(index) => setSelectedBook(index)} />
+        <FocusCards cards={books} onCardClick={(index) => setSelectedBook(index)} onDownload={handleDownload}/>
 
         {/* Modal */}
         <Modal backdrop="blur" isOpen={selectedBook !== null} onClose={handleClose}>

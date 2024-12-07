@@ -7,11 +7,11 @@ import { Provider } from "./provider.tsx";
 import "@/styles/globals.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter basename="/eduvault-deploy/">
       <Provider>
         <App />
       </Provider>
     </BrowserRouter>
-  // </React.StrictMode>
+  </React.StrictMode>
 );

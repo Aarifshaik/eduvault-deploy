@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectItem } from "@nextui-org/select";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
+import { button } from "@nextui-org/theme";
 
 export default function ResourcesPage() {
   interface CardType {
@@ -15,6 +16,7 @@ export default function ResourcesPage() {
     description: string;
     img: string;
     author: string;
+    pdfUrl: string;
   }
 
   const [books, setBooks] = useState<CardType[]>([]);
@@ -50,15 +52,19 @@ export default function ResourcesPage() {
       axios
         .get(searchUrl)
         .then((response) => {
+          // console.log(response.data);
           const fetchedBooks = response.data.map(
-            (book: { title: string; img: string; author: string; description: string }) => ({
+            (book: { title: string; img: string; author: string; description: string,pdfUrl:string }) => ({
               title: book.title,
               author: book.author,
               img: book.img,
               description: book.description,
+              pdfUrl: book.pdfUrl,
             })
           );
+          // console.log(fetchedBooks);
           setBooks(fetchedBooks);
+          console.log(fetchedBooks);
         })
         .catch((error) => {
           console.error("Error fetching books:", error);
@@ -83,6 +89,12 @@ export default function ResourcesPage() {
 
   const handleClose = () => setSelectedBook(null);
 
+  const handleDownload = (index: number) => {
+    console.log(`Downloading book: ${books[index].title}`);
+    // Implement download logic here
+  };
+  
+
   const handleSelectBook = (keys: SharedSelection) => {
     const value = Array.from(keys)[0] as string; // Get the selected key
     if (value === "All") {
@@ -91,7 +103,7 @@ export default function ResourcesPage() {
         setCategory(value); // Update the category state
       }
   };
-
+  // console.log("Rendering ResourcesPage");
   return (
     <DefaultLayout>
       <LabelInputContainer
@@ -119,7 +131,14 @@ export default function ResourcesPage() {
 
 
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <FocusCards cards={books} onCardClick={(index) => setSelectedBook(index)} />
+        {/* <FocusCards cards={books} onCardClick={(index) => setSelectedBook(index)}/> */}
+
+        <FocusCards
+          cards={books}
+          onCardClick={(index) => setSelectedBook(index)}
+          onDownload={(index) => handleDownload(index)} // Pass the download handler
+        />
+
 
         {/* Modal */}
         <Modal backdrop="blur" isOpen={selectedBook !== null} onClose={handleClose}>

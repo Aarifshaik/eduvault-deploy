@@ -7,18 +7,15 @@ import LoginPage from "@/pages/General/login";
 import BrowsePage from "@/pages/General/browse";
 import ResourcesPage from "@/pages/Educator/resources";
 import UploadPage from "@/pages/Extras/upload";
-// import AdminPage from "@/pages/admin";
-// import { NavbarDemo } from "./pages/navbardemo";
-// import Demo from "./pages/demo";
 import PostOauthRegPage from "./pages/Validations/postOauthReg";
-// import {SearchBooksPage} from "./pages/search/SearchBooksPage";
-
+// import DownloadPdf from "./pages/Student/help";
 
 import { useEffect, useState } from "react";
 
 import ProtectedRoute from '@/rules/ProtectedRoute';
 
 import OAuthCallback from "./pages/Validations/OAuthCallback";
+import BookShelfPage from "./pages/Student/stubookshelf";
 
 
 function App() {
@@ -67,12 +64,14 @@ function App() {
         <Route element={<OAuthCallback />} path="/callback" />
         <Route element={<UploadPage />} path="/upload" />
         <Route element={<BrowsePage />} path="/blog" />
-        {/* <Route element={<AdminPage />} path="/admin" /> */}
         
         
         <Route element={<StudentHomePage />} path="/stuhome" />
-        {/* <Route element={<SearchBooksPage />} path="/search" /> */}
         <Route element={<ResourcesPage />} path="/resources" />
+        <Route element={<BookShelfPage />} path="/stubookshelf" />
+        {/* <Route element={<DownloadPdf />} path="/help" /> */}
+        
+        
         
       
       </Routes>
@@ -80,10 +79,6 @@ function App() {
       {isLoaded && (
         <Routes>
           <Route path="/postOauthReg" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={<PostOauthRegPage />} />} />
-          {/* <Route path="/demo" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={<Demo />} />} /> */}
-          {/* <Route path="/blog" element={<ProtectedRoute isAuthenticated={isAuthenticated} element={<BlogPage />} />} /> */}
-          {/* <Route element={<NavbarDemo />} path="/navbardemo" /> */}
-          
         </Routes>
       )}
     </>

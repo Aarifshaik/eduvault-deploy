@@ -13,27 +13,28 @@ export default function StudentHomePage() {
   // console.log("User in stuhome  "+user);
   const words = ["Inspire", "Explore", "Achieve", "Succeed"];
 
-  const handleLogout = () => {
-
-    fetch("http://localhost:8080/cuslogout", {
-      method: 'GET',
-      credentials: 'include', // Include cookies (for session-based logout)
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log("Logged out successfully");
-          localStorage.clear();
-          console.log("token: "+localStorage.getItem("token"));
-          // navigate("/login")
-        } else {
-          console.error("Logout failed");
-        }
-      })
-      .catch(error => {
-        console.error("Error during logout:", error);
-      });
-    console.log("Logged out");
-  };
+  // const handleButtonPress = () => {
+    // console.log("Logged out");
+    // window.location.href = "/resources";
+    // fetch("http://localhost:8080/cuslogout", {
+    //   method: 'GET',
+    //   credentials: 'include', // Include cookies (for session-based logout)
+    // })
+    //   .then(response => {
+    //     if (response.ok) {
+    //       console.log("Logged out successfully");
+    //       localStorage.clear();
+    //       console.log("token: "+localStorage.getItem("token"));
+    //       // navigate("/login")
+    //     } else {
+    //       console.error("Logout failed");
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error("Error during logout:", error);
+    //   });
+    // console.log("Logged out");
+  // };
   
   return (
     <DefaultLayout>
@@ -62,14 +63,14 @@ export default function StudentHomePage() {
               radius: "full",
               variant: "shadow",
             })}
-            // href="/student/resources"
-            onPress={handleLogout}
+            href="/resources"
+            // onPress={handleButtonPress}
           >
             Browse Resources
           </Link>
           <Link
             className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href="/student/bookshelf"
+            href="/stubookshelf"
           >
             Go to Bookshelf
           </Link>
