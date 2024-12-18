@@ -6,7 +6,9 @@ const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
-module.exports = {
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+module.exports = withMT({
   content: [
     "./index.html",
     './src/layouts/**/*.{js,ts,jsx,tsx,mdx}',
@@ -23,7 +25,7 @@ module.exports = {
   },
   darkMode: "class",
   plugins: [nextui(),addVariablesForColors],
-}
+});
 
 function addVariablesForColors({ addBase, theme }) {
   let allColors = flattenColorPalette(theme("colors"));

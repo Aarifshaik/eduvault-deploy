@@ -10,7 +10,7 @@ import UploadPage from "@/pages/Extras/upload";
 import PostOauthRegPage from "./pages/Validations/postOauthReg";
 // import DownloadPdf from "./pages/Student/help";
 import EducatorHomePage from "./pages/Educator/home";
-import EducatorDashboard from "./pages/Educator/assign";
+import EducatorDashBoard from "./pages/Educator/assign";
 
 import { useEffect, useState } from "react";
 
@@ -75,7 +75,7 @@ console.log(localStorage);
 
 
         <Route element={<EducatorHomePage />} path="/eduhome" />
-        <Route element={<EducatorDashboard />} path="/educatorassign" />
+        <Route element={<EducatorDashBoard />} path="/educatorassign" />
 
         
         
